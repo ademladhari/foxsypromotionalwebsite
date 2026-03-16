@@ -6,16 +6,16 @@
 @tailwind utilities;
 
 :root {
-  --bg: #fff5ed;
+  --bg: #fffbf7;
   --ink: #2d1f1a;
   --muted: #6f5b52;
   --primary: #ff7a5a;
   --primary-strong: #ff5c3a;
-  --peach: #ffd9c6;
-  --cream: #fff2e8;
+  --peach: #ffe7da;
+  --cream: #fff8f1;
   --card: #ffffff;
-  --border: rgba(255, 122, 90, 0.16);
-  --shadow: 0 24px 60px rgba(255, 122, 90, 0.18);
+  --border: rgba(255, 122, 90, 0.12);
+  --shadow: 0 20px 48px rgba(255, 122, 90, 0.14);
   font-family: 'Manrope', 'DM Sans', 'Segoe UI', sans-serif;
   font-weight: 400;
   color: var(--ink);
@@ -31,9 +31,9 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 189, 160, 0.45), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(255, 225, 205, 0.7), transparent 35%),
-    linear-gradient(180deg, #fff7f1 0%, #fff1e5 40%, #fffaf7 100%);
+  background: radial-gradient(circle at 20% 20%, rgba(255, 189, 160, 0.28), transparent 42%),
+    radial-gradient(circle at 80% 0%, rgba(255, 225, 205, 0.5), transparent 38%),
+    linear-gradient(180deg, #fffdfb 0%, #fff8f2 45%, #ffffff 100%);
   color: var(--ink);
 }
 
