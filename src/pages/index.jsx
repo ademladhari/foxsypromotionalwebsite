@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types, react/no-unescaped-entities */
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView, MotionConfig } from "framer-motion";
 import heroImg from "../assets/hero.png";
 import inappImg from "../assets/inapp.png";
@@ -19,11 +19,11 @@ const SPRING_SOFT = { type: "spring", stiffness: 95, damping: 18, mass: 0.8 };
 
 function Reveal({ children, delay = 0 }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: false, margin: "-60px" });
   return (
     <motion.div ref={ref}
       initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
       transition={{ ...SPRING_SOFT, delay }}>
       {children}
     </motion.div>
@@ -54,12 +54,12 @@ function Img({ src, label="Image", h=480, r=20, fit="cover" }) {
   return <div style={wrapper}><span style={{fontSize:13,fontWeight:500,color:OR3}}>{label}</span></div>;
 }
 
-function Ring({ px, py, size, op=0.18, delay=0, dur=5 }) {
+function Ring({ px, py, size, op=0.26, delay=0, dur=5 }) {
   return (
     <motion.div animate={{y:["0px","14px","0px"]}}
       transition={{duration:dur,repeat:Infinity,ease:"easeInOut",delay}}
       style={{position:"absolute",left:px,top:py,width:size,height:size,
-        borderRadius:"50%",border:`1.5px solid ${OR}`,opacity:op,pointerEvents:"none",zIndex:1}}/>
+        borderRadius:"50%",border:`2px solid rgba(240,123,74,.72)`,opacity:op,pointerEvents:"none",zIndex:1}}/>
   );
 }
 function Dot({ px, py, size=8, op=0.30, delay=0 }) {
@@ -67,46 +67,73 @@ function Dot({ px, py, size=8, op=0.30, delay=0 }) {
     <motion.div animate={{scale:[1,1.8,1],opacity:[op,op*0.2,op]}}
       transition={{duration:3.2,repeat:Infinity,ease:"easeInOut",delay}}
       style={{position:"absolute",left:px,top:py,width:size,height:size,
-        borderRadius:"50%",background:OR,opacity:op,pointerEvents:"none",zIndex:1}}/>
+        borderRadius:"50%",background:"rgba(240,123,74,.88)",boxShadow:"0 0 0 4px rgba(240,123,74,.12)",opacity:op,pointerEvents:"none",zIndex:1}}/>
   );
 }
 function Spin({ px, py, size, op=0.22, cw=true, dur=20 }) {
   return (
     <div style={{position:"absolute",left:px,top:py,width:size,height:size,
-      borderRadius:"50%",border:"1.5px dashed rgba(255,107,53,.35)",opacity:op,
+      borderRadius:"50%",border:"2px dashed rgba(240,123,74,.5)",opacity:op,
       pointerEvents:"none",zIndex:1,animation:`${cw?"rCW":"rCCW"} ${dur}s linear infinite`}}/>
   );
 }
 function Dots({ corner }) {
   const pos = corner==="tl"?{left:0,top:0}:corner==="tr"?{right:0,top:0}:corner==="bl"?{left:0,bottom:0}:{right:0,bottom:0};
   return (
-    <svg style={{position:"absolute",zIndex:1,pointerEvents:"none",opacity:0.16,...pos}} width="120" height="120" viewBox="0 0 120 120">
-      {Array.from({length:5},(_,r)=>Array.from({length:5},(_,c)=>(
-        <circle key={`${r}-${c}`} cx={c*24+12} cy={r*24+12} r="2.2" fill={OR}/>
+    <svg style={{position:"absolute",zIndex:1,pointerEvents:"none",opacity:0.28,...pos}} width="144" height="144" viewBox="0 0 144 144">
+      {Array.from({length:6},(_,r)=>Array.from({length:6},(_,c)=>(
+        <circle key={`${r}-${c}`} cx={c*24+12} cy={r*24+12} r="3" fill="rgba(240,123,74,.85)"/>
       )))}
     </svg>
   );
 }
-function Arc({ d, op=0.09, delay=0.3, dur=2 }) {
-  const pathRef=useRef(null); const svgRef=useRef(null);
-  const inView=useInView(svgRef,{once:true});
-  useEffect(()=>{
-    const p=pathRef.current; if(!inView||!p)return;
-    const len=p.getTotalLength();
-    p.style.strokeDasharray=`${len}`; p.style.strokeDashoffset=`${len}`;
-    const t=setTimeout(()=>{p.style.transition=`stroke-dashoffset ${dur}s ease ${delay}s`;p.style.strokeDashoffset="0";},40);
-    return()=>clearTimeout(t);
-  },[inView,delay,dur]);
+function Diamond({ px, py, size=22, op=0.32, delay=0, dur=9 }) {
   return (
-    <svg ref={svgRef} style={{position:"absolute",inset:0,width:"100%",height:"100%",overflow:"visible",pointerEvents:"none",zIndex:1}}>
-      <path ref={pathRef} d={d} fill="none" stroke={OR} strokeWidth="1.2" opacity={op}/>
-    </svg>
+    <motion.div
+      animate={{ rotate: [45, 225, 405], scale: [1, 1.12, 1] }}
+      transition={{ duration: dur, repeat: Infinity, ease: "easeInOut", delay }}
+      style={{
+        position:"absolute",left:px,top:py,width:size,height:size,
+        border:`2px solid rgba(240,123,74,.68)`,boxShadow:"0 0 0 6px rgba(240,123,74,.08)",borderRadius:6,
+        opacity:op,pointerEvents:"none",zIndex:1,transform:"rotate(45deg)"
+      }}
+    />
+  );
+}
+function OrbitalLine({ px, py, width=140, delay=0, dur=10, op=0.28, rotate=0 }) {
+  return (
+    <motion.div
+      animate={{ x: [0, 16, 0], opacity: [op, op * 1.2, op] }}
+      transition={{ duration: dur, repeat: Infinity, ease: "easeInOut", delay }}
+      style={{
+        position:"absolute",left:px,top:py,width,height:2,
+        background:"linear-gradient(90deg, rgba(240,123,74,0), rgba(240,123,74,.78), rgba(240,123,74,0))",
+        opacity:op,pointerEvents:"none",zIndex:1,transform:`rotate(${rotate}deg)`
+      }}
+    />
+  );
+}
+function Arc({ d, op=0.18, delay=0.3, dur=2 }) {
+  return (
+    <motion.svg style={{position:"absolute",inset:0,width:"100%",height:"100%",overflow:"visible",pointerEvents:"none",zIndex:1}}>
+      <motion.path
+        d={d}
+        fill="none"
+        stroke={OR}
+        strokeWidth="1.8"
+        opacity={op}
+        initial={{ pathLength: 0, opacity: 0 }}
+        whileInView={{ pathLength: 1, opacity: op }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: dur, delay, ease: EASE_OUT }}
+      />
+    </motion.svg>
   );
 }
 function Glow({ px, py, size=400, op=0.07 }) {
   return (
     <div style={{position:"absolute",left:px,top:py,width:size,height:size,borderRadius:"50%",
-      background:`radial-gradient(circle,rgba(255,107,53,${op*1.6}) 0%,transparent 65%)`,
+      background:`radial-gradient(circle,rgba(240,123,74,${op*2.2}) 0%,transparent 65%)`,
       pointerEvents:"none",zIndex:1,transform:"translate(-50%,-50%)"}}/>
   );
 }
@@ -228,8 +255,18 @@ export default function FocsyLanding() {
         <Dot  px="calc(93% - 3px)"   py="calc(26% - 3px)"   size={6}   op={0.28} delay={0.7}/>
         <Dot  px="calc(4% - 3px)"    py="calc(44% - 3px)"   size={6}   op={0.22} delay={1.1}/>
         <Dots corner="tl"/><Dots corner="br"/>
+        <Diamond px="calc(18% - 12px)" py="calc(18% - 12px)" size={24} op={0.24} delay={0.3} dur={10}/>
+        <Diamond px="calc(88% - 10px)" py="calc(74% - 10px)" size={20} op={0.18} delay={1.1} dur={8}/>
+        <Diamond px="calc(34% - 14px)" py="calc(86% - 14px)" size={28} op={0.3} delay={0.9} dur={12}/>
+        <Diamond px="calc(82% - 14px)" py="calc(12% - 14px)" size={28} op={0.26} delay={1.6} dur={11}/>
+        <OrbitalLine px="8%" py="18%" width={180} rotate={18} op={0.16} delay={0.2} dur={12}/>
+        <OrbitalLine px="72%" py="84%" width={150} rotate={-18} op={0.14} delay={1.1} dur={9}/>
+        <OrbitalLine px="18%" py="70%" width={220} rotate={32} op={0.24} delay={0.7} dur={13}/>
+        <OrbitalLine px="62%" py="24%" width={200} rotate={-26} op={0.22} delay={1.3} dur={10}/>
+        <Dots corner="tr"/>
         <Arc d="M -80 700 Q 350 150 900 420 T 2000 180"  op={0.08} dur={2.2} delay={0.9}/>
         <Arc d="M 2000 60 Q 1300 380 750 180 T -80 480"  op={0.06} dur={2.5} delay={1.3}/>
+        <Arc d="M 100 120 Q 540 320 940 120 T 1800 360" op={0.16} dur={2.4} delay={0.6}/>
 
         <div style={{position:"relative",zIndex:2}}>
           <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{...SPRING_SMOOTH,delay:0.1}}>
@@ -269,6 +306,11 @@ export default function FocsyLanding() {
       <Reveal>
         <section id="features" style={{padding:"120px 10%",position:"relative",overflow:"hidden",background:S2}}>
           <Dots corner="tl"/><Dots corner="br"/>
+          <Dots corner="tr"/>
+          <Diamond px="calc(10% - 16px)" py="calc(18% - 16px)" size={32} op={0.3} delay={0.4} dur={10}/>
+          <Diamond px="calc(88% - 14px)" py="calc(30% - 14px)" size={28} op={0.28} delay={1.1} dur={9}/>
+          <OrbitalLine px="6%" py="82%" width={200} rotate={14} op={0.24} delay={0.3} dur={11}/>
+          <OrbitalLine px="70%" py="12%" width={170} rotate={-22} op={0.22} delay={1.2} dur={9}/>
           <Glow px="98%" py="5%"  size={320} op={0.08}/>
           <Glow px="-2%" py="55%" size={300} op={0.06}/>
           <Ring px="calc(96% - 150px)" py="calc(6% - 150px)"  size={300} op={0.1}  delay={0.4} dur={8}/>
@@ -300,7 +342,7 @@ export default function FocsyLanding() {
               {benefits.map((b,i)=>(
                 <motion.div key={b.title} className="bcard"
                   initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}}
-                  viewport={{once:true,amount:0.2}} transition={{...SPRING_SMOOTH,delay:i*0.07}}
+                  viewport={{once:false,amount:0.2}} transition={{...SPRING_SMOOTH,delay:i*0.07}}
                   style={{padding:"28px 24px",background:S1,border:"1px solid rgba(255,107,53,.22)",borderRadius:18}}>
                   <div style={{fontSize:24,marginBottom:14}}>{b.icon}</div>
                   <div style={{fontSize:10,textTransform:"uppercase",letterSpacing:"0.12em",color:OR,fontWeight:600,marginBottom:8}}>{b.accent}</div>
@@ -317,6 +359,11 @@ export default function FocsyLanding() {
       <Reveal delay={0.05}>
         <section style={{padding:"120px 10%",background:S1,borderTop:`1px solid ${OR4}`,position:"relative",overflow:"hidden"}}>
           <Dots corner="br"/>
+          <Dots corner="tl"/>
+          <Diamond px="calc(14% - 15px)" py="calc(22% - 15px)" size={30} op={0.28} delay={0.4} dur={9}/>
+          <Diamond px="calc(84% - 12px)" py="calc(76% - 12px)" size={24} op={0.24} delay={1.1} dur={8}/>
+          <OrbitalLine px="12%" py="16%" width={170} rotate={18} op={0.24} delay={0.2} dur={10}/>
+          <OrbitalLine px="72%" py="86%" width={200} rotate={-16} op={0.22} delay={1} dur={12}/>
           <Glow px="100%" py="50%" size={380} op={0.08}/>
           <Ring px="calc(-2% - 100px)" py="calc(65% - 100px)" size={200} op={0.1}  delay={0.5} dur={7}/>
           <Spin px="calc(-2% - 120px)" py="calc(50% - 120px)" size={240} op={0.55} cw={false} dur={22}/>
@@ -354,6 +401,11 @@ export default function FocsyLanding() {
       <Reveal delay={0.05}>
         <section id="how" style={{padding:"120px 10%",background:S2,position:"relative",overflow:"hidden"}}>
           <Dots corner="tl"/><Dots corner="br"/>
+          <Dots corner="bl"/>
+          <Diamond px="calc(12% - 15px)" py="calc(16% - 15px)" size={30} op={0.28} delay={0.5} dur={11}/>
+          <Diamond px="calc(86% - 14px)" py="calc(68% - 14px)" size={28} op={0.26} delay={1.2} dur={10}/>
+          <OrbitalLine px="8%" py="72%" width={220} rotate={12} op={0.22} delay={0.4} dur={12}/>
+          <OrbitalLine px="64%" py="18%" width={180} rotate={-20} op={0.24} delay={1.1} dur={9}/>
           <Glow px="50%"  py="-2%" size={400} op={0.06}/>
           <Ring px="calc(97% - 110px)" py="calc(14% - 110px)" size={220} op={0.1}  delay={0.3} dur={8}/>
           <Spin px="calc(97% - 130px)" py="calc(14% - 130px)" size={260} op={0.55} cw={true}  dur={26}/>
@@ -395,6 +447,11 @@ export default function FocsyLanding() {
       <Reveal delay={0.05}>
         <section style={{padding:"120px 10%",background:S1,borderTop:`1px solid ${OR4}`,position:"relative",overflow:"hidden"}}>
           <Dots corner="tr"/><Dots corner="bl"/>
+          <Dots corner="tl"/>
+          <Diamond px="calc(16% - 15px)" py="calc(84% - 15px)" size={30} op={0.3} delay={0.6} dur={10}/>
+          <Diamond px="calc(82% - 13px)" py="calc(20% - 13px)" size={26} op={0.24} delay={1.3} dur={9}/>
+          <OrbitalLine px="8%" py="24%" width={180} rotate={24} op={0.22} delay={0.2} dur={11}/>
+          <OrbitalLine px="74%" py="74%" width={210} rotate={-18} op={0.24} delay={1} dur={10}/>
           <Glow px="-2%" py="50%" size={380} op={0.07}/>
           <Ring px="calc(103% - 140px)" py="calc(90% - 140px)" size={280} op={0.1}  delay={0.5} dur={8}/>
           <Spin px="calc(103% - 165px)" py="calc(90% - 165px)" size={330} op={0.50} cw={false} dur={28}/>
@@ -429,6 +486,14 @@ export default function FocsyLanding() {
       <Reveal delay={0.05}>
         <section style={{padding:"120px 10%",background:S2,position:"relative",overflow:"hidden"}}>
           <Dots corner="tl"/><Dots corner="tr"/>
+          <Diamond px="calc(15% - 16px)" py="calc(14% - 16px)" size={32} op={0.2} delay={0.5} dur={11}/>
+          <Diamond px="calc(88% - 12px)" py="calc(82% - 12px)" size={24} op={0.24} delay={1.1} dur={9}/>
+          <Diamond px="calc(56% - 12px)" py="calc(8% - 12px)" size={24} op={0.3} delay={0.8} dur={10}/>
+          <Diamond px="calc(8% - 14px)" py="calc(64% - 14px)" size={28} op={0.26} delay={1.4} dur={12}/>
+          <OrbitalLine px="12%" py="78%" width={190} rotate={10} op={0.16} delay={0.4} dur={11}/>
+          <OrbitalLine px="66%" py="22%" width={160} rotate={-12} op={0.14} delay={1.2} dur={10}/>
+          <OrbitalLine px="20%" py="42%" width={240} rotate={16} op={0.26} delay={0.5} dur={12}/>
+          <OrbitalLine px="70%" py="86%" width={180} rotate={-24} op={0.22} delay={1.5} dur={9}/>
           <Glow px="100%" py="50%" size={420} op={0.08}/>
           <Glow px="50%"  py="105%" size={300} op={0.05}/>
           <Ring px="calc(-2% - 120px)" py="calc(50% - 120px)" size={240} op={0.1}  delay={0.4} dur={8}/>
@@ -450,7 +515,7 @@ export default function FocsyLanding() {
               {strictPoints.map((p,i)=>(
                 <motion.div key={p.title}
                   initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}}
-                  viewport={{once:true,amount:0.2}} transition={{...SPRING_SMOOTH,delay:i*0.08}}
+                  viewport={{once:false,amount:0.2}} transition={{...SPRING_SMOOTH,delay:i*0.08}}
                   style={{padding:"28px 24px",background:S1,border:"1px solid rgba(255,107,53,.22)",borderRadius:18}}>
                   <div style={{width:32,height:32,borderRadius:10,background:"rgba(255,107,53,.12)",border:"1px solid rgba(255,107,53,.22)",display:"flex",alignItems:"center",justifyContent:"center",marginBottom:16}}>
                     <div style={{width:10,height:10,borderRadius:"50%",background:OR}}/>
@@ -484,6 +549,11 @@ export default function FocsyLanding() {
       <Reveal delay={0.05}>
         <section style={{padding:"120px 10%",background:S1,borderTop:`1px solid ${OR4}`,position:"relative",overflow:"hidden"}}>
           <Dots corner="tr"/><Dots corner="bl"/>
+          <Dots corner="br"/>
+          <Diamond px="calc(12% - 15px)" py="calc(22% - 15px)" size={30} op={0.3} delay={0.5} dur={10}/>
+          <Diamond px="calc(90% - 12px)" py="calc(82% - 12px)" size={24} op={0.24} delay={1.3} dur={8}/>
+          <OrbitalLine px="10%" py="78%" width={190} rotate={10} op={0.24} delay={0.4} dur={10}/>
+          <OrbitalLine px="72%" py="20%" width={180} rotate={-18} op={0.22} delay={1.1} dur={11}/>
           <Glow px="100%" py="60%" size={360} op={0.07}/>
           <Ring px="calc(-3% - 110px)" py="calc(90% - 110px)" size={220} op={0.1}  delay={0.4} dur={7}/>
           <Spin px="calc(-3% - 130px)" py="calc(90% - 130px)" size={260} op={0.50} cw={true}  dur={24}/>
@@ -515,7 +585,7 @@ export default function FocsyLanding() {
               {testimonials.map((t,i)=>(
                 <motion.div key={t.name} className="tcard"
                   initial={{opacity:0,x:20}} whileInView={{opacity:1,x:0}}
-                  viewport={{once:true,amount:0.2}} transition={{...SPRING_SMOOTH,delay:i*0.1}}
+                  viewport={{once:false,amount:0.2}} transition={{...SPRING_SMOOTH,delay:i*0.1}}
                   style={{padding:"30px 28px",background:S2,border:`1px solid ${OR4}`,borderRadius:18}}>
                   <div style={{color:OR,fontSize:14,marginBottom:14,letterSpacing:2}}>★★★★★</div>
                   <div style={{fontSize:15,lineHeight:1.72,color:"#6B3A1F",fontWeight:300,marginBottom:22,fontStyle:"italic"}}>"{t.quote}"</div>
@@ -537,6 +607,11 @@ export default function FocsyLanding() {
       <Reveal delay={0.05}>
         <section id="pricing" style={{padding:"120px 10%",background:S2,borderTop:`1px solid ${OR4}`,position:"relative",overflow:"hidden"}}>
           <Dots corner="tl"/><Dots corner="br"/>
+          <Dots corner="tr"/>
+          <Diamond px="calc(14% - 15px)" py="calc(18% - 15px)" size={30} op={0.3} delay={0.4} dur={10}/>
+          <Diamond px="calc(86% - 14px)" py="calc(80% - 14px)" size={28} op={0.28} delay={1.2} dur={9}/>
+          <OrbitalLine px="8%" py="68%" width={210} rotate={14} op={0.24} delay={0.3} dur={12}/>
+          <OrbitalLine px="68%" py="14%" width={180} rotate={-16} op={0.22} delay={1.1} dur={10}/>
           <Glow px="50%" py="50%" size={600} op={0.05}/>
           <Ring px="calc(-2% - 100px)" py="calc(30% - 100px)" size={200} op={0.1}  delay={0.5} dur={7}/>
           <Spin px="calc(-2% - 125px)" py="calc(30% - 125px)" size={250} op={0.50} cw={true}  dur={26}/>
@@ -574,7 +649,7 @@ export default function FocsyLanding() {
             {renderedPlans.map(plan=>(
               <motion.div key={plan.name}
                 initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}}
-                viewport={{once:true,amount:0.2}} transition={{...SPRING_SOFT}}
+                viewport={{once:false,amount:0.2}} transition={{...SPRING_SOFT}}
                 style={{
                   padding:"40px 36px",borderRadius:24,position:"relative",
                   background:plan.id==="pro"?OR:S1,
