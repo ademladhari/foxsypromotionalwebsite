@@ -1,4 +1,10 @@
-#https://stackoverflow.com/questions/58065603/netlify-renders-404-on-page-refresh-using-react-and-react-router 
+# SPA fallback plus explicit SEO landing-page routes
+
+[[redirects]]
+  from = "/block-instagram-reels"
+  to = "/block-instagram-reels.html"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
