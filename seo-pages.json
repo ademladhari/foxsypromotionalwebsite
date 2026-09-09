@@ -1,0 +1,67 @@
+[
+  {
+    "slug": "block-instagram-reels",
+    "title": "How to Block Instagram Reels Without Blocking Instagram | Focsy",
+    "description": "Block Instagram Reels without blocking all of Instagram. Focsy helps you keep useful Instagram features while cutting the endless Reels feed.",
+    "eyebrow": "Instagram Reels blocker",
+    "headline": "Block Instagram Reels without blocking Instagram.",
+    "intro": "You may still need Instagram for messages, friends, creators or work. The problem is often the endless Reels feed. Focsy is built to help reduce that compulsive scrolling without forcing you to delete Instagram completely.",
+    "sections": [
+      {"heading": "Why block Reels instead of Instagram?", "paragraphs": ["Deleting the whole app can be overkill when the addictive part is one feed. A targeted blocker lets you keep useful parts of Instagram while adding friction to the part that keeps pulling you into another video."]},
+      {"heading": "How to reduce Instagram Reels with Focsy", "steps": ["Install Focsy on Android from Google Play.", "Choose Instagram and configure the blocking behavior you want.", "Use Focsy to interrupt access to the Reels loop while keeping the rest of your phone available."]},
+      {"heading": "Build a calmer phone instead of deleting everything", "paragraphs": ["Focsy can also help with YouTube Shorts and other distracting apps, so you can reduce the parts of your phone that waste time without turning your smartphone into a brick."]}
+    ]
+  },
+  {
+    "slug": "block-youtube-shorts",
+    "title": "How to Block YouTube Shorts on Android Without Blocking YouTube | Focsy",
+    "description": "Block YouTube Shorts on Android while keeping normal YouTube available. Use Focsy to reduce Shorts doomscrolling without giving up useful videos.",
+    "eyebrow": "YouTube Shorts blocker",
+    "headline": "Block YouTube Shorts without giving up YouTube.",
+    "intro": "YouTube can be useful for tutorials, lectures, music and long-form videos. Shorts are different: one swipe can quickly become dozens. Focsy gives Android users a way to add friction to Shorts without treating all of YouTube as the problem.",
+    "sections": [
+      {"heading": "Why target Shorts instead of blocking YouTube?", "paragraphs": ["A full YouTube block may stop distraction, but it also removes useful content. If Shorts are the part that pulls you into automatic scrolling, targeting that behavior is a more practical approach for many people."]},
+      {"heading": "How to reduce YouTube Shorts with Focsy", "steps": ["Install Focsy on your Android phone.", "Configure YouTube as one of the apps you want Focsy to manage.", "Use the blocking controls to interrupt the Shorts loop when you would otherwise keep swiping."]},
+      {"heading": "Use YouTube intentionally", "paragraphs": ["The goal is not to make your phone useless. It is to make intentional actions easy and automatic scrolling harder. You can still open YouTube when you actually know what you want to watch."]}
+    ]
+  },
+  {
+    "slug": "stop-doomscrolling",
+    "title": "How to Stop Doomscrolling on Android | Focsy",
+    "description": "Stop doomscrolling on Android by adding friction to Reels, Shorts and distracting apps. Focsy helps you take back control of your screen time.",
+    "eyebrow": "Anti-doomscrolling for Android",
+    "headline": "Stop doomscrolling before five minutes becomes an hour.",
+    "intro": "Doomscrolling often starts with a harmless check. You open one app, watch one short video, and suddenly much more time has passed than you intended. Focsy is designed to put friction between that first tap and an endless feed.",
+    "sections": [
+      {"heading": "Make the addictive path harder", "paragraphs": ["Willpower has to win every time. A blocker only has to be configured once. Reducing easy access to the feeds that consume most of your time can make your default phone behavior more intentional."]},
+      {"heading": "A simple anti-doomscrolling setup", "steps": ["Identify the one or two feeds that consume most of your unplanned screen time.", "Configure Focsy around those apps or feeds instead of blocking everything at once.", "Increase the restriction when you need stronger focus and loosen it when you intentionally want access."]},
+      {"heading": "Start with Reels and Shorts", "paragraphs": ["Instagram Reels and YouTube Shorts are common endless-scroll triggers. Focsy lets you start with those high-friction targets and then add other distracting apps if you need to."]}
+    ]
+  },
+  {
+    "slug": "reduce-screen-time",
+    "title": "How to Reduce Screen Time on Android Without Deleting Your Apps | Focsy",
+    "description": "Reduce Android screen time without deleting every social app. Focsy helps block distracting feeds and apps while keeping useful phone features available.",
+    "eyebrow": "Reduce screen time",
+    "headline": "Reduce screen time without deleting your whole digital life.",
+    "intro": "Screen-time totals are useful, but knowing you spent three hours scrolling does not stop the next session. Focsy focuses on changing access to the apps and feeds that repeatedly turn a quick check into a long distraction.",
+    "sections": [
+      {"heading": "Target the time you did not mean to spend", "paragraphs": ["Not all phone time is wasted. Navigation, messaging, work, learning and long-form videos can be intentional. A useful screen-time strategy focuses first on the sessions you did not plan to start or did not plan to continue."]},
+      {"heading": "Three steps to lower screen time", "steps": ["Check which apps or feeds are responsible for most of your unplanned usage.", "Use Focsy to block or restrict the worst offenders.", "Keep useful apps available so the setup is realistic enough to maintain every day."]},
+      {"heading": "Use friction instead of constant self-control", "paragraphs": ["A small barrier at the right moment can be more useful than another reminder after you have already spent the time. Focsy is built around putting that barrier where distraction starts."]}
+    ]
+  },
+  {
+    "slug": "app-blocker-android",
+    "title": "App Blocker for Android: Block Distracting Apps, Reels & Shorts | Focsy",
+    "description": "Focsy is an Android app blocker for distracting apps, Instagram Reels and YouTube Shorts. Create stronger focus without making your phone unusable.",
+    "eyebrow": "Android app blocker",
+    "headline": "An Android app blocker built for the distracting parts of your phone.",
+    "intro": "A good app blocker should help when you are most likely to ignore your own limits. Focsy lets you restrict distracting apps and target endless feeds such as Instagram Reels and YouTube Shorts so your phone stays useful without being constantly tempting.",
+    "sections": [
+      {"heading": "What should an app blocker actually solve?", "paragraphs": ["The goal is not simply to make apps impossible to open. The useful question is which apps or feeds repeatedly steal time you intended to spend somewhere else, and how much friction you need to stop that pattern."]},
+      {"heading": "Set up Focsy around your real distractions", "steps": ["Install Focsy from Google Play.", "Select the apps and feeds that create the most distraction for you.", "Configure restrictions that are strong enough to interrupt automatic opening and scrolling."]},
+      {"heading": "Block less, focus more", "paragraphs": ["Targeted restrictions can be easier to live with than deleting social apps completely. Focsy is designed to help you keep useful functionality while reducing the parts that repeatedly pull you away from what you meant to do."]}
+    ]
+  }
+]
