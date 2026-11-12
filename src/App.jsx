@@ -7,7 +7,7 @@ const App = () => {
 
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div role="status" style={{ padding: 24 }}>Loading…</div>}>
         {routing}
       </Suspense>
     </div>
