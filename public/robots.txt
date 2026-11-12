@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://focsy.netlify.app/sitemap.xml
